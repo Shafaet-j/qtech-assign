@@ -1,8 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
+import { useDispatch } from "react-redux";
+import { addTodo } from "@/app/redux/features/todoSlice";
 
 const TodoModal = () => {
+  const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -19,6 +22,7 @@ const TodoModal = () => {
 
   const onFinish = (values) => {
     console.log(values);
+    dispatch(addTodo(values));
   };
 
   return (
