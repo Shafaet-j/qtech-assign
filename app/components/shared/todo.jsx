@@ -1,23 +1,32 @@
 import React from "react";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { deleteTask } from "@/app/redux/features/todoSlice";
+import { deleteTask, toggoleComplete } from "@/app/redux/features/todoSlice";
 import { Checkbox } from "antd";
 
 const Todo = ({ item }) => {
+  const dispatch = useDispatch();
   const onChange = (e) => {
     console.log(`checked = ${e.target.checked}`);
+    dispatch(toggoleComplete(item.id));
   };
-  const dispatch = useDispatch();
   return (
-    <div className=" flex justify-between items-center bg-zinc-600/50 rounded p-2 mb-2">
-      <span>
-        <Checkbox onChange={onChange}>Checkbox</Checkbox>
-      </span>
-      <p>{item.title}</p>
-      <div>{item.isCompleted ? <p>Completed</p> : <p>Pending</p>}</div>
+    <div className=" grid grid-cols-4 items-center bg-zinc-600/50 rounded p-2 mb-2">
+      <div className=" flex items-center gap-2">
+        <span>
+          <Checkbox onChange={onChange}></Checkbox>
+        </span>
+        <p>{item.title}</p>
+      </div>
+      <div>
+        {item.isCompleted === true ? (
+          <p className=" text-green-600">Completed</p>
+        ) : (
+          <p className=" text-red-500">Pending</p>
+        )}
+      </div>
       <p>Priority</p>
-      <div className=" flex gap-3 items-center text-left">
+      <div className=" flex gap-3 items-center justify-end">
         <button className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-5 py-2 rounded-md font-semibold text-white">
           <EditOutlined />
           edit
