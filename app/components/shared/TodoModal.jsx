@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal, Select } from "antd";
 import { useDispatch } from "react-redux";
 import { addTodo } from "@/app/redux/features/todoSlice";
 import { v4 as uuidv4 } from "uuid";
@@ -26,8 +26,9 @@ const TodoModal = () => {
     const taskDetails = {
       id: randomId,
       title: values.Name,
+      priority: values.Priority,
     };
-    console.log(taskDetails);
+    console.log(values);
     dispatch(addTodo(taskDetails));
   };
 
@@ -54,11 +55,22 @@ const TodoModal = () => {
           >
             <Input />
           </Form.Item>
+          <Form.Item
+            name="Priority"
+            label="Priotiry"
+            rules={[{ required: true, message: "Province is required" }]}
+          >
+            <Select placeholder="Set priority">
+              <Select.Option value="high">High</Select.Option>
+              <Select.Option value="medium">Medium</Select.Option>
+              <Select.Option value="low">Low</Select.Option>
+            </Select>
+          </Form.Item>
 
           <Form.Item>
             <button
               onClick={handleOk}
-              htmlType="submit"
+              htmltype="submit"
               className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-5 py-2 rounded-md font-semibold text-white"
             >
               submit

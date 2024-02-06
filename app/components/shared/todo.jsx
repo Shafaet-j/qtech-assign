@@ -25,18 +25,27 @@ const Todo = ({ item }) => {
           <p className=" text-red-500">Pending</p>
         )}
       </div>
-      <p>Priority</p>
+      <div className=" flex items-center gap-2">
+        <span
+          className={`${
+            item.priority === "high"
+              ? "bg-red-500"
+              : item.priority === "medium"
+              ? "bg-yellow-400"
+              : "bg-green-600"
+          } size-3 rounded-full`}
+        ></span>
+        <p>{item.priority}</p>
+      </div>
       <div className=" flex gap-3 items-center justify-end">
         <button className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-5 py-2 rounded-md font-semibold text-white">
           <EditOutlined />
-          edit
         </button>
         <button
           onClick={() => dispatch(deleteTask(item.id))}
           className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-5 py-2 rounded-md font-semibold text-white"
         >
           <DeleteOutlined />
-          delete
         </button>
       </div>
     </div>
