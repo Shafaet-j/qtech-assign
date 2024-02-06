@@ -3,6 +3,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { deleteTask, toggoleComplete } from "@/app/redux/features/todoSlice";
 import { Checkbox } from "antd";
+import TodoModal from "./TodoModal";
 
 const Todo = ({ item }) => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const Todo = ({ item }) => {
       </div>
       <div className=" flex gap-3 items-center justify-end">
         <button className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-5 py-2 rounded-md font-semibold text-white">
-          <EditOutlined />
+          <TodoModal item={item} type="update" />
         </button>
         <button
           onClick={() => dispatch(deleteTask(item.id))}

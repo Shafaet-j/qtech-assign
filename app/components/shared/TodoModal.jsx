@@ -2,12 +2,14 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Modal, Select } from "antd";
 import { useDispatch } from "react-redux";
-import { addTodo } from "@/app/redux/features/todoSlice";
+import { addTodo, editTask } from "@/app/redux/features/todoSlice";
 import { v4 as uuidv4 } from "uuid";
+import { EditOutlined } from "@ant-design/icons";
 
-const TodoModal = () => {
+const TodoModal = ({ type, item }) => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [form] = Form.useForm();
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -29,16 +31,29 @@ const TodoModal = () => {
       priority: values.Priority,
     };
     console.log(values);
-    dispatch(addTodo(taskDetails));
+    if (type === "add") {
+      dispatch(addTodo(taskDetails));
+      form.resetFields();
+    }
+    if (type === "update") {
+      const finalData = {
+        title: values.Name,
+        priority: values.Priority,
+        id: item?.id,
+      };
+      dispatch(editTask(finalData));
+    }
   };
 
   return (
     <>
       <button
         onClick={showModal}
-        className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-5 py-2 rounded-md font-semibold text-white"
+        className={`${
+          type === "add" ? "px-5 py-2" : ""
+        } bg-gradient-to-r from-fuchsia-600 to-purple-600  rounded-md font-semibold text-white`}
       >
-        Add todo
+        {type === "add" ? <span>Add task</span> : <EditOutlined />}
       </button>
       <Modal
         footer={false}
@@ -47,20 +62,20 @@ const TodoModal = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Form onFinish={onFinish} variant="filled">
+        <Form form={form} onFinish={onFinish} variant="filled">
           <Form.Item
             label="Task name"
             name="Name"
             rules={[{ required: true, message: "Please input your task" }]}
           >
-            <Input />
+            <Input defaultValue={item?.title} />
           </Form.Item>
           <Form.Item
             name="Priority"
             label="Priotiry"
             rules={[{ required: true, message: "Province is required" }]}
           >
-            <Select placeholder="Set priority">
+            <Select defaultValue={item?.priority} placeholder="Set priority">
               <Select.Option value="high">High</Select.Option>
               <Select.Option value="medium">Medium</Select.Option>
               <Select.Option value="low">Low</Select.Option>

@@ -16,7 +16,7 @@ const Homepage = () => {
       <div>
         <h1 className=" text-3xl font-bold text-center mt-5 mb-5">Todo app</h1>
         <div className=" flex items-center justify-between mb-5">
-          <TodoModal />
+          <TodoModal type="add" />
 
           <div>
             <Select
