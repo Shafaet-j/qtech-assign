@@ -2,6 +2,7 @@
 import { Button, Select } from "antd";
 import React from "react";
 import Todo from "../shared/todo";
+import TodoModal from "../shared/TodoModal";
 
 const handleChange = (value) => {
   console.log(`selected ${value}`);
@@ -12,9 +13,7 @@ const Homepage = () => {
       <div>
         <h1 className=" text-3xl font-bold text-center mt-5 mb-5">Todo app</h1>
         <div className=" flex items-center justify-between mb-5">
-          <button className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-5 py-2 rounded-md font-semibold">
-            Add todo
-          </button>
+          <TodoModal />
 
           <div>
             <Select
