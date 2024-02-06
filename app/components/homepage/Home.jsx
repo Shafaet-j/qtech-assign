@@ -23,12 +23,12 @@ const Homepage = () => {
                 {
                   options: [
                     {
-                      label: "Jack",
-                      value: "jack",
+                      label: "All",
+                      value: "all",
                     },
                     {
-                      label: "Jack2",
-                      value: "jack2",
+                      label: "Incomplete",
+                      value: "incomplete",
                     },
                   ],
                 },
@@ -36,7 +36,7 @@ const Homepage = () => {
             />
           </div>
         </div>
-        <div className=" flex">
+        <div className=" flex justify-between items-center">
           <p>Task name</p>
           <p>Priority</p>
         </div>
