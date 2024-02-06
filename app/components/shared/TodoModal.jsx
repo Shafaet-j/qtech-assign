@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
 import { useDispatch } from "react-redux";
 import { addTodo } from "@/app/redux/features/todoSlice";
+import { v4 as uuidv4 } from "uuid";
 
 const TodoModal = () => {
   const dispatch = useDispatch();
@@ -21,8 +22,13 @@ const TodoModal = () => {
   };
 
   const onFinish = (values) => {
-    console.log(values);
-    dispatch(addTodo(values));
+    const randomId = uuidv4();
+    const taskDetails = {
+      id: randomId,
+      title: values.Name,
+    };
+    console.log(taskDetails);
+    dispatch(addTodo(taskDetails));
   };
 
   return (

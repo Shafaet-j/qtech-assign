@@ -3,13 +3,16 @@ import { Button, Select } from "antd";
 import React from "react";
 import Todo from "../shared/todo";
 import TodoModal from "../shared/TodoModal";
+import { useSelector } from "react-redux";
 
 const handleChange = (value) => {
   console.log(`selected ${value}`);
 };
 const Homepage = () => {
+  const { todos } = useSelector((state) => state.todos);
+  console.log(todos);
   return (
-    <section className="bg-gradient-to-r from-violet-200 to-pink-200 w-3/4 mx-auto h-screen rounded-3xl mt-10 px-10">
+    <section className="bg-gradient-to-r from-violet-200 to-pink-200 w-full lg:w-3/4 mx-auto h-screen rounded-3xl mt-10 lg:px-10">
       <div>
         <h1 className=" text-3xl font-bold text-center mt-5 mb-5">Todo app</h1>
         <div className=" flex items-center justify-between mb-5">
@@ -39,8 +42,11 @@ const Homepage = () => {
             />
           </div>
         </div>
-        <Todo />
-        <Todo />
+        <div>
+          {todos.map((item) => (
+            <Todo key={item.id} item={item} />
+          ))}
+        </div>
       </div>
     </section>
   );
