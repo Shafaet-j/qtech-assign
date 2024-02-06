@@ -46,6 +46,11 @@ const Homepage = () => {
           {todos.map((item) => (
             <Todo key={item.id} item={item} />
           ))}
+          {todos.length < 1 && (
+            <div className="bg-zinc-600/50 rounded p-2">
+              <p className=" text-center">No todo</p>
+            </div>
+          )}
         </div>
       </div>
     </section>
