@@ -1,16 +1,22 @@
 "use client";
 import { Button, Select } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import Todo from "../shared/todo";
 import TodoModal from "../shared/TodoModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { filterTask } from "@/app/redux/features/todoSlice";
 
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
 const Homepage = () => {
-  const { todos } = useSelector((state) => state.todos);
-  console.log(todos);
+  const { todos, filteredTodos } = useSelector((state) => state.todos);
+  const [filterValue, setFilterValue] = useState("all");
+  const dispatch = useDispatch();
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+    dispatch(filterTask(value));
+    setFilterValue(value);
+  };
+  const renderTodos = filterValue === "all" ? todos : filteredTodos;
+
   return (
     <section className="bg-gradient-to-r from-violet-200 to-pink-200 w-full lg:w-3/4 mx-auto h-screen rounded-3xl mt-10 lg:px-10">
       <div>
@@ -36,6 +42,10 @@ const Homepage = () => {
                       label: "Incomplete",
                       value: "incomplete",
                     },
+                    {
+                      label: "Complete",
+                      value: "complete",
+                    },
                   ],
                 },
               ]}
@@ -43,7 +53,7 @@ const Homepage = () => {
           </div>
         </div>
         <div>
-          {todos.map((item) => (
+          {renderTodos.map((item) => (
             <Todo key={item.id} item={item} />
           ))}
           {todos.length < 1 && (

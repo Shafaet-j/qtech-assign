@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   todos: [],
+  filteredTodos: [],
 };
+
 const todoSlice = createSlice({
   name: "todo",
   initialState,
@@ -23,8 +25,18 @@ const todoSlice = createSlice({
       task.title = action.payload.title;
       task.priority = action.payload.priority;
     },
+    filterTask: (state, action) => {
+      const filterValue = action.payload.toLowerCase();
+      if (filterValue === "all") {
+        state.filteredTodos = state.todos;
+      } else if (filterValue === "complete") {
+        state.filteredTodos = state.todos.filter((todo) => todo.isCompleted);
+      } else if (filterValue === "incomplete") {
+        state.filteredTodos = state.todos.filter((todo) => !todo.isCompleted);
+      }
+    },
   },
 });
-export const { addTodo, deleteTask, toggoleComplete, editTask } =
+export const { addTodo, deleteTask, toggoleComplete, editTask, filterTask } =
   todoSlice.actions;
 export default todoSlice.reducer;
