@@ -15,7 +15,10 @@ const Todo = ({ item }) => {
     <div className=" grid grid-cols-4 items-center bg-zinc-600/50 rounded p-2 mb-2">
       <div className=" flex items-center gap-2">
         <span>
-          <Checkbox onChange={onChange}></Checkbox>
+          <Checkbox
+            checked={item.isCompleted && "checked"}
+            onChange={onChange}
+          ></Checkbox>
         </span>
         <p>{item.title}</p>
       </div>
