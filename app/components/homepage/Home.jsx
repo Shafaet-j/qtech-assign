@@ -8,6 +8,7 @@ import { filterTask } from "@/app/redux/features/todoSlice";
 
 const Homepage = () => {
   const { todos, filteredTodos } = useSelector((state) => state.todos);
+  console.log(todos);
   const [filterValue, setFilterValue] = useState("all");
   const dispatch = useDispatch();
   const handleChange = (value) => {
@@ -53,10 +54,10 @@ const Homepage = () => {
           </div>
         </div>
         <div>
-          {renderTodos.map((item) => (
+          {renderTodos?.map((item) => (
             <Todo key={item.id} item={item} />
           ))}
-          {todos.length < 1 && (
+          {todos?.length < 1 && (
             <div className="bg-zinc-600/50 rounded p-2">
               <p className=" text-center">No todo</p>
             </div>
