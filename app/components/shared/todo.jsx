@@ -12,7 +12,7 @@ const Todo = ({ item }) => {
     dispatch(toggoleComplete(item.id));
   };
   return (
-    <div className=" grid grid-cols-4 items-center bg-zinc-600/50 rounded p-2 mb-2">
+    <div className=" grid grid-cols-4 items-center  rounded p-2 mb-2 bg-gray-600">
       <div className=" flex items-center gap-2">
         <span>
           <Checkbox
@@ -20,13 +20,15 @@ const Todo = ({ item }) => {
             onChange={onChange}
           ></Checkbox>
         </span>
-        <p>{item.title}</p>
+        <p className=" text-lg text-white font-semibold capitalize">
+          {item.title}
+        </p>
       </div>
       <div>
         {item.isCompleted === true ? (
-          <p className=" text-green-600">Completed</p>
+          <p className=" text-green-600 font-semibold ">Completed</p>
         ) : (
-          <p className=" text-red-500">Pending</p>
+          <p className=" text-red-500 font-semibold">Pending</p>
         )}
       </div>
       <div className=" flex items-center gap-2">
@@ -37,17 +39,17 @@ const Todo = ({ item }) => {
               : item.priority === "medium"
               ? "bg-yellow-400"
               : "bg-green-600"
-          } size-3 rounded-full`}
+          } size-3 rounded-full `}
         ></span>
-        <p>{item.priority}</p>
+        <p className=" text-white font-semibold capitalize">{item.priority}</p>
       </div>
       <div className=" flex gap-3 items-center justify-end">
-        <button className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-5 py-2 rounded-md font-semibold text-white">
+        <button className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-2 py-2 rounded-md font-semibold text-white">
           <TodoModal item={item} type="update" />
         </button>
         <button
           onClick={() => dispatch(deleteTask(item.id))}
-          className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-5 py-2 rounded-md font-semibold text-white"
+          className=" bg-gradient-to-r from-fuchsia-600 to-purple-600 px-2 py-2 rounded-md font-semibold text-white"
         >
           <DeleteOutlined />
         </button>

@@ -19,7 +19,7 @@ const Homepage = () => {
   const renderTodos = filterValue === "all" ? todos : filteredTodos;
 
   return (
-    <section className="bg-gradient-to-r from-violet-200 to-pink-200 w-full lg:w-3/4 mx-auto h-screen rounded-3xl mt-10 lg:px-10">
+    <section className="bg-gradient-to-r from-violet-200 to-pink-200 w-full lg:w-3/4 mx-auto h-screen rounded-3xl mt-10 lg:px-10 px-5">
       <div>
         <h1 className=" text-3xl font-bold text-center mt-5 mb-5">Todo app</h1>
         <div className=" flex items-center justify-between mb-5">
@@ -27,7 +27,7 @@ const Homepage = () => {
 
           <div>
             <Select
-              defaultValue="Filter"
+              defaultValue="All"
               style={{
                 width: 200,
               }}
